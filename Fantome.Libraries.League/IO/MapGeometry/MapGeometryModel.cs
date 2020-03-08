@@ -151,7 +151,7 @@ namespace Fantome.Libraries.League.IO.MapGeometry
 
             this.BoundingBox.Write(bw);
             this.Transformation.Write(bw);
-            bw.Write((byte)this.Flags);
+            bw.Write(this.Flags);
 
             if (version == 7)
             {
