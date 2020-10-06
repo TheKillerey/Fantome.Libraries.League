@@ -240,6 +240,10 @@ namespace Fantome.Libraries.League.IO.BIN
             {
                 this.Value = new BINContainer(br, this);
             }
+            else if (this.Type == BINValueType.Container2)
+            {
+                this.Value = new BINContainer(br, this);
+            }
             else if (this.Type == BINValueType.Structure || this.Type == BINValueType.Embedded)
             {
                 this.Value = new BINStructure(br, this);
@@ -352,6 +356,10 @@ namespace Fantome.Libraries.League.IO.BIN
             {
                 (this.Value as BINContainer).Write(bw);
             }
+            else if (this.Type == BINValueType.Container2)
+            {
+                (this.Value as BINContainer).Write(bw);
+            }
             else if (this.Type == BINValueType.Structure || this.Type == BINValueType.Embedded)
             {
                 (this.Value as BINStructure).Write(bw);
@@ -426,6 +434,7 @@ namespace Fantome.Libraries.League.IO.BIN
                     break;
 
                 case BINValueType.Container:
+                case BINValueType.Container2:
                 case BINValueType.Structure:
                 case BINValueType.Embedded:
                 case BINValueType.Optional:
@@ -584,6 +593,10 @@ namespace Fantome.Libraries.League.IO.BIN
                 return (uint)this.Value == (uint)other.Value;
             }
             else if (this.Type == BINValueType.Container)
+            {
+                return (this.Value as BINContainer).Equals(other.Value as BINContainer);
+            }
+            else if (this.Type == BINValueType.Container2)
             {
                 return (this.Value as BINContainer).Equals(other.Value as BINContainer);
             }
